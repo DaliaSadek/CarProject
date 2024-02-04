@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarWebsiteController;
 use App\Http\Controllers\CategoryController;
@@ -51,4 +52,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'verified'], function () {
     Route::get('messages', [MessageController::class, 'index'])->name('messages');
     Route::get('showMessage/{id}', [MessageController::class, 'show'])->name('showMessage');
     Route::get('deleteMessage/{id}', [MessageController::class, 'destroy'])->name('deleteMessage');
+
+    Route::get('users', [UserController::class, 'index'])->name('users');
+    Route::get('createUser', [UserController::class, 'create'])->name('createUser');
+    Route::post('storeUser', [UserController::class, 'store'])->name('storeUser');
+    Route::get('editUser/{id}', [UserController::class, 'edit'])->name('editUser');
+    Route::put('updateUser/{id}', [UserController::class, 'update'])->name('updateUser');
+
 });
