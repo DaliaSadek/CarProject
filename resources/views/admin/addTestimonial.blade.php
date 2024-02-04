@@ -44,26 +44,43 @@
                         </div>
                         <div class="x_content">
                             <br />
-                            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                            <form action="{{route('storeTestimonial')}}" method="POST" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                                @csrf
+
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Name <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="name" required="required" class="form-control ">
+                                        <input type="text" id="name" required="required" class="form-control " name="name" value="{{old('name')}}">
+                                        @error('name')
+                                            <div>
+                                                {{$message}}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Position <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="position" required="required" class="form-control ">
+                                        <input type="text" id="position" required="required" class="form-control " name="job" value="{{old('job')}}">
+                                        @error('job')
+                                        <div>
+                                            {{$message}}
+                                        </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="content">Content <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <textarea id="content" name="content" required="required" class="form-control">Contents</textarea>
+                                        <textarea id="content" name="comment" required="required" class="form-control">Contents</textarea>
+                                        @error('comment')
+                                        <div>
+                                            {{$message}}
+                                        </div>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -71,7 +88,7 @@
                                     <label class="col-form-label col-md-3 col-sm-3 label-align">Published</label>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" class="flat">
+                                            <input type="checkbox" class="flat" name="published">
                                         </label>
                                     </div>
                                 </div>

@@ -46,6 +46,7 @@
                             <br />
                             <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="{{route('updateCategory', $category->id)}}" method="POST">
                                 @csrf
+                                @method('put')
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="add-category">Edit Category <span class="required">*</span>
                                     </label>

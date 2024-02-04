@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarWebsiteController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TestimonialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,8 +37,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'verified'], function () {
     Route::get('createCategory', [CategoryController::class, 'create'])->name('createCategory');
     Route::post('storeCategory', [CategoryController::class, 'store'])->name('storeCategory');
     Route::get('editCategory/{id}', [CategoryController::class, 'edit'])->name('editCategory');
-    Route::post('updateCategory/{id}', [CategoryController::class, 'update'])->name('updateCategory');
+    Route::put('updateCategory/{id}', [CategoryController::class, 'update'])->name('updateCategory');
     Route::get('deleteCategory/{id}', [CategoryController::class, 'destroy'])->name('deleteCategory');
+
+    Route::get('testimonials', [TestimonialController::class, 'index'])->name('testimonials');
+    Route::get('createTestimonial', [TestimonialController::class, 'create'])->name('createTestimonial');
+    Route::post('storeTestimonial', [TestimonialController::class, 'store'])->name('storeTestimonial');
+    Route::get('editTestimonial/{id}', [TestimonialController::class, 'edit'])->name('editTestimonial');
+    Route::put('updateTestimonial/{id}', [TestimonialController::class, 'update'])->name('updateTestimonial');
+    Route::get('deleteTestimonial/{id}', [TestimonialController::class, 'destroy'])->name('deleteTestimonial');
 
     Route::get('messages', function () {
         return view('admin/messages');
