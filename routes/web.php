@@ -25,3 +25,8 @@ Route::get('about', [CarWebsiteController::class, 'about'])->name('about');
 Route::get('blog', [CarWebsiteController::class, 'blog'])->name('blog');
 Route::get('contact', [CarWebsiteController::class, 'contact'])->name('contact');
 Route::get('single/{id}', [CarWebsiteController::class, 'single'])->name('single');
+
+
+Route::get('messages', function () {
+    return view('admin/messages');
+});
