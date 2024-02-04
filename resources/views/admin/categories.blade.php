@@ -57,16 +57,14 @@
 
 
                                             <tbody>
-                                            <tr>
-                                                <td>Category</td>
-                                                <td><img src="{{asset('assets/admin/images/edit.png')}}" alt="Edit"></td>
-                                                <td><img src="{{asset('assets/admin/images/delete.png')}}" alt="Delete"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Category</td>
-                                                <td><img src="{{asset('assets/admin/images/edit.png')}}" alt="Edit"></td>
-                                                <td><img src="{{asset('assets/admin/images/delete.png')}}" alt="Delete"></td>
-                                            </tr>
+                                            @foreach($categories as $category)
+                                                <tr>
+                                                    <td>{{$category->categoryName}}</td>
+                                                    <td><a href="{{route('editCategory', $category->id)}}"><img src="{{asset('assets/admin/images/edit.png')}}" alt="Edit"></a></td>
+                                                    <td><a href="{{route('deleteCategory', $category->id)}}"><img src="{{asset('assets/admin/images/delete.png')}}" alt="Delete"></a></td>
+                                                </tr>
+                                            @endforeach
+
 
                                             </tbody>
                                         </table>

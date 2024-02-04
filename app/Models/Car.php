@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Car extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'carTitle',
+        'luggage',
+        'doors',
+        'price',
+        'passengers',
+        'image',
+        'description',
+        'active',
+        'categoryId'
+    ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+}

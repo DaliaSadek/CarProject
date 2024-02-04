@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarWebsiteController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,14 @@ Auth::routes(['verify'=>true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'verified'], function () {
+
+    Route::get('categories', [CategoryController::class, 'index'])->name('categories');
+    Route::get('createCategory', [CategoryController::class, 'create'])->name('createCategory');
+    Route::post('storeCategory', [CategoryController::class, 'store'])->name('storeCategory');
+    Route::get('editCategory/{id}', [CategoryController::class, 'edit'])->name('editCategory');
+    Route::post('updateCategory/{id}', [CategoryController::class, 'update'])->name('updateCategory');
+    Route::get('deleteCategory/{id}', [CategoryController::class, 'destroy'])->name('deleteCategory');
+
     Route::get('messages', function () {
         return view('admin/messages');
     })->name('messages');
