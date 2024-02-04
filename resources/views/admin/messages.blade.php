@@ -56,24 +56,14 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr>
-                                                    <td>First Name and Last Name</td>
-                                                    <td>mail@example.com</td>
-                                                    <td><img src="{{asset('assets/admin/images/edit.png')}}" alt="Edit"></td>
-                                                    <td><img src="{{asset('assets/admin/images/delete.png')}}" alt="Delete"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>First Name and Last Name</td>
-                                                    <td>mail@example.com</td>
-                                                    <td><img src="{{asset('assets/admin/images/edit.png')}}" alt="Edit"></td>
-                                                    <td><img src="{{asset('assets/admin/images/delete.png')}}" alt="Delete"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>First Name and Last Name</td>
-                                                    <td>mail@example.com</td>
-                                                    <td><img src="{{asset('assets/admin/images/edit.png')}}" alt="Edit"></td>
-                                                    <td><img src="{{asset('assets/admin/images/delete.png')}}" alt="Delete"></td>
-                                                </tr>
+                                                @foreach($messages as $contact)
+                                                    <tr>
+                                                        <td>{{$contact->firstname}} {{$contact->lastname}}</td>
+                                                        <td>{{$contact->email}}</td>
+                                                        <td><a href="{{route('showMessage', $contact->id)}}"><img src="{{asset('assets/admin/images/edit.png')}}" alt="Show"></a></td>
+                                                        <td><a href="{{route('deleteMessage', $contact->id)}}"><img src="{{asset('assets/admin/images/delete.png')}}" alt="Delete"></a></td>
+                                                    </tr>
+                                                @endforeach
 
                                                 </tbody>
                                             </table>

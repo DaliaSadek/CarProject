@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarWebsiteController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +48,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'verified'], function () {
     Route::put('updateTestimonial/{id}', [TestimonialController::class, 'update'])->name('updateTestimonial');
     Route::get('deleteTestimonial/{id}', [TestimonialController::class, 'destroy'])->name('deleteTestimonial');
 
-    Route::get('messages', function () {
-        return view('admin/messages');
-    })->name('messages');
+    Route::get('messages', [MessageController::class, 'index'])->name('messages');
+    Route::get('showMessage/{id}', [MessageController::class, 'show'])->name('showMessage');
+    Route::get('deleteMessage/{id}', [MessageController::class, 'destroy'])->name('deleteMessage');
 });
