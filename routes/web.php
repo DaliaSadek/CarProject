@@ -26,7 +26,11 @@ Route::get('blog', [CarWebsiteController::class, 'blog'])->name('blog');
 Route::get('contact', [CarWebsiteController::class, 'contact'])->name('contact');
 Route::get('single/{id}', [CarWebsiteController::class, 'single'])->name('single');
 
+Auth::routes(['verify'=>true]);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('messages', function () {
-    return view('admin/messages');
+Route::group(['prefix' => 'admin', 'middleware' => 'verified'], function () {
+    Route::get('messages', function () {
+        return view('admin/messages');
+    })->name('messages');
 });
