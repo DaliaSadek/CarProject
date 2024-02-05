@@ -3,15 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\Car;
+use App\Traits\Common;
+
 
 class CarController extends Controller
 {
+    use Common;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $cars = Car::get();
+        return view('admin/cars', compact('cars'));
     }
 
     /**
@@ -19,7 +25,8 @@ class CarController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::get();
+        return view('admin/addCar', compact('categories'));
     }
 
     /**
@@ -27,15 +34,22 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $data = $request->validate([
+            'carTitle' => 'required|string|max:255',
+            'luggage' => 'required',
+            'doors' => 'required',
+            'price' => 'required',
+            'passengers' => 'required',
+            'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'description' => 'required',
+            'categoryId' => 'required'
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        $data['active'] = isset($request->active);
+        $data['image'] = $this->uploadFile($request->image, 'assets/images');
+
+        Car::create($data);
+        return redirect('admin/cars');
     }
 
     /**
@@ -43,7 +57,10 @@ class CarController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $car = Car::findOrFail($id);
+        $categories = Category::get();
+
+        return view('admin/editCar', compact(['categories', 'car']));
     }
 
     /**
@@ -51,7 +68,27 @@ class CarController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+//        return dd($request);
+
+        $data = $request->validate([
+            'carTitle' => 'required|string|max:255',
+            'luggage' => 'required',
+            'doors' => 'required',
+            'price' => 'required',
+            'passengers' => 'required',
+            'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
+            'description' => 'required',
+            'categoryId' => 'required'
+        ]);
+
+        $data['active'] = isset($request->active);
+
+        if(is_file($request->image))
+            $data['image'] = $this->uploadFile($request->image, 'assets/images');
+
+        Car::where('id', $id)->update($data);
+
+        return redirect('admin/cars');
     }
 
     /**
@@ -59,6 +96,8 @@ class CarController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Car::where('id', $id)->delete();
+
+        return redirect('admin/cars');
     }
 }

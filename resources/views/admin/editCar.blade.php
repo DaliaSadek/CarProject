@@ -44,50 +44,55 @@
                         </div>
                         <div class="x_content">
                             <br />
-                            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                            <form action="{{route('updateCar', $car->id)}}" method="POST" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                                @csrf
+                                @method('put')
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="title">Title <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="title" required="required" class="form-control ">
+                                        <input type="text" id="title" required="required" class="form-control " name="carTitle" value="{{$car->carTitle}}">
+                                        @error('carTitle')
+                                        <div>{{$message}}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="content">Content <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <textarea id="content" name="content" required="required" class="form-control">Contents</textarea>
+                                        <textarea id="content" required="required" class="form-control" name="description">{{$car->description}}</textarea>
                                     </div>
                                 </div>
                                 <div class="item form-group">
                                     <label for="luggage" class="col-form-label col-md-3 col-sm-3 label-align">Luggage <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input id="luggage" class="form-control" type="number" name="luggage" required="required">
+                                        <input id="luggage" class="form-control" type="number" name="luggage" required="required" value="{{$car->luggage}}">
                                     </div>
                                 </div>
                                 <div class="item form-group">
                                     <label for="doors" class="col-form-label col-md-3 col-sm-3 label-align">Doors <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input id="doors" class="form-control" type="number" name="doors" required="required">
+                                        <input id="doors" class="form-control" type="number" name="doors" required="required" value="{{$car->doors}}">
                                     </div>
                                 </div>
                                 <div class="item form-group">
                                     <label for="passengers" class="col-form-label col-md-3 col-sm-3 label-align">Passengers <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input id="passengers" class="form-control" type="number" name="passengers" required="required">
+                                        <input id="passengers" class="form-control" type="number" name="passengers" required="required" value="{{$car->passengers}}">
                                     </div>
                                 </div>
                                 <div class="item form-group">
                                     <label for="price" class="col-form-label col-md-3 col-sm-3 label-align">Price <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input id="price" class="form-control" type="number" name="price" required="required">
+                                        <input id="price" class="form-control" type="number" name="price" required="required" value="{{$car->price}}">
                                     </div>
                                 </div>
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align">Active</label>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" class="flat">
+                                            <input type="checkbox" class="flat" name="active" @checked($car->active)>
                                         </label>
                                     </div>
                                 </div>
@@ -95,8 +100,8 @@
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="image">Image <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="file" id="image" name="image" required="required" class="form-control">
-                                        <img src="../images/car_1.jpg" alt="" style="width: 300px;">
+                                        <input type="file" id="image" name="image"  class="form-control">
+                                        <img src="{{asset('assets/images/'.$car->image)}}" alt="" style="width: 300px;">
                                     </div>
                                 </div>
 
@@ -104,10 +109,11 @@
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="title">Category <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <select class="form-control" name="category" id="">
-                                            <option value=" ">Select Category</option>
-                                            <option value="cat1">Category 1</option>
-                                            <option value="cat2">Category 2</option>
+                                        <select class="form-control" id="" name="categoryId">
+                                            @foreach($categories as $category)
+                                                <option value="{{$category->id}}" @selected($category->id == $car->categoryId)>{{$category->categoryName}}</option>
+                                            @endforeach
+
                                         </select>
                                     </div>
                                 </div>

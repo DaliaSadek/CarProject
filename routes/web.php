@@ -6,7 +6,7 @@ use App\Http\Controllers\CarWebsiteController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\MessageController;
-
+use App\Http\Controllers\CarController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,5 +58,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'verified'], function () {
     Route::post('storeUser', [UserController::class, 'store'])->name('storeUser');
     Route::get('editUser/{id}', [UserController::class, 'edit'])->name('editUser');
     Route::put('updateUser/{id}', [UserController::class, 'update'])->name('updateUser');
+
+    Route::get('cars', [CarController::class, 'index'])->name('cars');
+    Route::get('createCar', [CarController::class, 'create'])->name('createCar');
+    Route::post('storeCar', [CarController::class, 'store'])->name('storeCar');
+    Route::get('editCar/{id}', [CarController::class, 'edit'])->name('editCar');
+    Route::put('updateCar/{id}', [CarController::class, 'update'])->name('updateCar');
+    Route::get('deleteCar/{id}', [CarController::class, 'destroy'])->name('deleteCar');
 
 });
