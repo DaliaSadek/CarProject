@@ -18,11 +18,10 @@ class Car extends Model
         'image',
         'description',
         'active',
-        'categoryId'
+        'categoryId',
     ];
 
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
+    public function category(){
+        return $this->belongsTo(Category::class, 'categoryId');
     }
 }

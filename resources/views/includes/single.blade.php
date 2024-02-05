@@ -5,8 +5,8 @@
             <div class="col-lg-12">
 
                 <div class="intro">
-                    <h1><strong>Single Blog Posts Title</strong></h1>
-                    <div class="pb-4"><strong class="text-black">Posted on May 22, 2020</strong></div>
+                    <h1><strong>{{$car->carTitle}}</strong></h1>
+                    <div class="pb-4"><strong class="text-black">Posted on {{date('M d Y'), strtotime($car->created_at)}}</strong></div>
                 </div>
 
             </div>
