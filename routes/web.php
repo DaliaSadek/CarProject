@@ -28,6 +28,7 @@ Route::get('testimonial', [CarWebsiteController::class, 'testimonial'])->name('t
 Route::get('about', [CarWebsiteController::class, 'about'])->name('about');
 Route::get('blog', [CarWebsiteController::class, 'blog'])->name('blog');
 Route::get('contact', [CarWebsiteController::class, 'contact'])->name('contact');
+Route::post('sendMessage', [MessageController::class, 'store'])->name('storeMessage');
 Route::get('single/{id}', [CarWebsiteController::class, 'single'])->name('single');
 
 Auth::routes(['verify'=>true]);
